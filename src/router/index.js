@@ -129,6 +129,20 @@ export const constantRoutes = [
  * the routes that need to be dynamically loaded based on user roles
  */
 export const asyncRoutes = [
+  { //@@tips 要这么写才生效  ---- 2020-05-05 11:04:24
+    path: '/test',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/test/index'),
+        name: 'test',
+        meta: { title: 'Test', icon: 'test', noCache: true }
+      }
+    ]
+  },
+
+
   {
     path: '/permission',
     component: Layout,
