@@ -7,7 +7,7 @@
         :key="item.title + index"
         :label="item.title"
         :[widthType]="item.width ? item.width : 'auto'"
-        v-bind="item.options || {}"
+        v-bind="item.attrOptions || {}"
       >
       <!-- eslint-enable -->
         <template #default="{row, $index}">
@@ -52,9 +52,9 @@ a common table component for 'lazy' developer table-building quickly
 # usage-addvence
 
 1.columnsList
-properties: 'name', 'key', 'width', 'options'
+properties: 'name', 'key', 'width', 'attrOptions'
 'name' and 'key' in every column item is required, while 'width' is no required
-'options' property provide a way for you to custem the el-table-column's props
+'attrOptions' property provide a way for you to custem the el-table-column's props
 
 for 'laziest' person, here is a lazy-template: 'name-key-width'
 
@@ -84,14 +84,14 @@ then, nothing more ...
 
 # disadvantage
 
-1.these is no way for you to touch the el-table-column's event
+1.for complex idea, try name slot, or give up this component ...
 
-2.for complex idea, try name slot, or give up this component ...
+2.for columnsList item with 'attrOptions', you cann't use the columnsList-template grammar
 
 # demo data
 1.columnsList:
 [
-    { title: 'DDDD', key: 'date$t', width: '100%', },
+    { title: 'DDDD', key: 'date$t', width: '100%', attrOptions: {width: 200%},},
     { title: 'ADDRESS', key: 'address', width: '200%', },
     { title: 'NAME', key: 'name', width: '100%', },
     { title: "momey", key: 'number$a', width: '100%', }
@@ -204,7 +204,6 @@ export default {
 
       // remove '$\w' in every column key
       list.forEach(item => (item.key = item.key.replace(this.filterReg, '')))
-      console.log(JSON.stringify(list, null, 2))
       return list
     },
 
@@ -234,7 +233,8 @@ export default {
     this.checkFilterExist()
   },
 
-  mounted() {},
+  mounted() {
+  },
 
   methods: {
     checkFilterExist() {
